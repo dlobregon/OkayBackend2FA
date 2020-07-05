@@ -10,7 +10,8 @@ const fs= require('fs'),
 // importing the routes
 const indexRoutes = require("./routes/index.js"), 
       userRoutes = require("./routes/users.js"),
-      linkRoutes= require("./routes/links.js")
+      linkRoutes= require("./routes/links.js"),
+      authRoutes= require("./routes/auths")
       ;
 
 const crendential={};
@@ -41,6 +42,7 @@ app.use(function(req, res, next) {
 app.use("/", indexRoutes);
 app.use("/users",userRoutes);
 app.use("/link",linkRoutes);
+app.use("/auth",authRoutes);
 
 if(config.mode==="2"){
   var httpsServer = https.createServer(credentials, app);
