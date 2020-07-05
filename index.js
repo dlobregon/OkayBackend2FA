@@ -3,12 +3,20 @@ const fs= require('fs'),
       config = require("./config"),
       express = require("express"),
       bodyParser = require("body-parser"),
-      //db = require("./db"),
-      //authCheckMiddleware = require("./auth/auth-check"),
-      env = process.env;
+      db = require("./db"),
+      sqlite3 = require('sqlite3')
+      env = process.env,
+      app = express(),
+      https = require('https');
 
-const https = require('https');
-const crendential={}
+// importing the routes
+const indexRoutes = require("./routes/index.js"), 
+      userRoutes = require("./routes/users.js")
+      ;
+
+const crendential={};
+
+// checking if project is running in production mode
 if(config.mode==="2"){
  credentials = {
   key: fs.readFileSync(config.keyPem),
@@ -17,10 +25,8 @@ if(config.mode==="2"){
  };
 }
 
-// se obtienen los modulos de las rutas del api.
-const indexRoutes = require("./routes/index.js")
-      ;
-const app = express();
+
+db.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -34,6 +40,7 @@ app.use(function(req, res, next) {
 });
 
 app.use("/", indexRoutes);
+app.use("/users",userRoutes);
 
 if(config.mode==="2"){
   var httpsServer = https.createServer(credentials, app);
