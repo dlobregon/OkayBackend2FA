@@ -2,6 +2,7 @@ const db=     require("../db")
 const config= require("../config.json")
 const crypto = require('crypto')
 const axios = require('axios')
+const callback = require("./callback")
 
 const PSS_BASE_URL = 'https://demostand.okaythis.com';
 
@@ -17,7 +18,7 @@ exports.authUser=(userId,done)=>{
     db.get().get(sqlQuery,{$id:userId},(err, result)=>{
         if(err){
             return done(err)
-        }else if(result.userExternalId!==undefined){
+        }else if(result!=undefined &&result.userExternalId!==undefined){
             // time to process the linking
             const userExternalId = result.userExternalId
             const tenantId = config.tenant; // replace with your tenantId
@@ -51,13 +52,52 @@ exports.authUser=(userId,done)=>{
                 }
               })
               .then((response) => {
-                return done(null,response.data)
+                // storing the "sessionExternalId"
+                let session={
+                  userExternalId:userExternalId,
+                  sessionExternalId:response.data.sessionExternalId
+                }
+                callback.register(session,(err,result)=>{
+                  if(err){
+                    return done(err)
+                  }else{
+                    return done(null,{result:result,sessionExternalId:response.data.sessionExternalId})
+                  }
+                })
               })
               .catch((error) => {
-                return done(error)
+                return done(error.response.data)
               });
         }else{
             return done({message:"User not found."})
         }
     })
+}
+
+exports.check=(session,done)=>{
+  const sessionExternalId  = session; // "replace with your 'sessionExternalId' from previous Auth request
+  const tenantId = config.tenant; // replace with your tenantId
+  const secret = config.token; // replace with your secret
+  const hashStr = `${tenantId}${sessionExternalId}${secret}`;
+  const signature = createHashSignature(hashStr);
+
+  axios({
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    url: `${PSS_BASE_URL}/gateway/check`,
+    data: {
+      tenantId,
+      sessionExternalId,
+      signature
+    }
+  })
+  .then((response) => {
+    return done(null, response.data)
+  })
+  .catch((error) => {
+    return done(error.response.data)
+  });
+
 }

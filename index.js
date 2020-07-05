@@ -11,7 +11,8 @@ const fs= require('fs'),
 const indexRoutes = require("./routes/index.js"), 
       userRoutes = require("./routes/users.js"),
       linkRoutes= require("./routes/links.js"),
-      authRoutes= require("./routes/auths")
+      authRoutes= require("./routes/auths"), 
+      callbackRoutes= require("./routes/callbacks")
       ;
 
 const crendential={};
@@ -43,6 +44,7 @@ app.use("/", indexRoutes);
 app.use("/users",userRoutes);
 app.use("/link",linkRoutes);
 app.use("/auth",authRoutes);
+app.use("/callback",callbackRoutes);
 
 if(config.mode==="2"){
   var httpsServer = https.createServer(credentials, app);

@@ -22,7 +22,17 @@ exports.connect = (done)=>{
             userExternalId TEXT)
     `
     db.run(sqlQuery)
-
+    /**
+     * defining the session table
+     */
+    sqlQuery=`
+        CREATE TABLE IF NOT EXISTS SESSION (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            userExternalId TEXT, 
+            sessionExternalId TEXT,
+            status TEXT) 
+    `
+    db.run(sqlQuery)
 }
 
 exports.get=function(){
