@@ -16,9 +16,10 @@ exports.connect = (done)=>{
      */
     let sqlQuery=`
         CREATE TABLE IF NOT EXISTS USER (
-            userExternalId INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            email TEXT)
+            email TEXT,
+            userExternalId TEXT)
     `
     db.run(sqlQuery)
 

@@ -1,17 +1,16 @@
 const fs= require('fs'),
-      path= require('path'),
       config = require("./config"),
       express = require("express"),
       bodyParser = require("body-parser"),
       db = require("./db"),
-      sqlite3 = require('sqlite3')
       env = process.env,
       app = express(),
       https = require('https');
 
 // importing the routes
 const indexRoutes = require("./routes/index.js"), 
-      userRoutes = require("./routes/users.js")
+      userRoutes = require("./routes/users.js"),
+      linkRoutes= require("./routes/links.js")
       ;
 
 const crendential={};
@@ -41,6 +40,7 @@ app.use(function(req, res, next) {
 
 app.use("/", indexRoutes);
 app.use("/users",userRoutes);
+app.use("/link",linkRoutes);
 
 if(config.mode==="2"){
   var httpsServer = https.createServer(credentials, app);
