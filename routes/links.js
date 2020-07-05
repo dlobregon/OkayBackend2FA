@@ -1,8 +1,8 @@
 const router  = require("express").Router();
 const link    = require("../controllers/link")
 
-router.route("/:id").get((req,res)=>{
-    link.linkingUser(req.params.id,(err,results)=>{
+router.route("/").post((req,res)=>{
+    link.linkingUser(req.body.id,(err,results)=>{
         if(err){
             res.send({
                 success:0,

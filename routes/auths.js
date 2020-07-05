@@ -1,8 +1,8 @@
 const router  = require("express").Router();
 const auth    = require("../controllers/auth")
 
-router.route("/user/:id").get((req,res)=>{
-    auth.authUser(req.params.id,(err,results)=>{
+router.route("/").post((req,res)=>{
+    auth.authUser(req.body.id,(err,results)=>{
         if(err){
             res.send({
                 success:0,
