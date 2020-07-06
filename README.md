@@ -3,7 +3,7 @@
 This project has a [live API demo](https://hackergt.tech:3000/) to check the each feature.
 
 #### Requirements
-Before to start make sure that you already installed the following tools:
+Before to start make sure that you already have installed the following tools:
 ~~~~
 npm
 node
@@ -19,7 +19,7 @@ npm install
 
 ## 1. Setup the Okay account
 #### 1.1 Create an Account in the Okay Website
-To use of the Okay API we are required to create an account in the Okay's [website](https://okaythis.com/signup).
+To use the Okay API we are required to create an account in the Okay's [website](https://okaythis.com/signup).
 
 #### 1.2 Register your server as a Tenant.
 Once you are logged in [Okay](https://demostand.okaythis.com/pss-admin/dashboard), go to "Tenants"  in the top toolbar, then click on "Tenants" from the drop down menu.
@@ -36,7 +36,7 @@ status - A Tenant status
 trialExpires - The date when your trial expires
 ~~~~
 
-*Note:* the Callback URL is an endpoint where Okay will send notifications to your server and it must be securely accessible.
+*Note:* the Callback URL is an endpoint where Okay will send POST request to your server and it must be securely accessible.
 
 ### 2. Configuration file.
 
