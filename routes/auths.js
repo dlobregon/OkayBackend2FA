@@ -31,4 +31,56 @@ router.route("/check/:session").get((req,res)=>{
     })
 })
 
+
+router.route("/getAll").get((req,res)=>{
+    auth.getAll((err,results)=>{
+        if(err){
+            res.send({
+                success:0,
+                error:err
+            })
+        }else{
+            res.json({
+                success:1,
+                users:results
+            })
+        }
+    })
+})
+
+router.route("/pending").get((req,res)=>{
+    auth.pending((err,results)=>{
+        if(err){
+            res.send({
+                success:0,
+                error:err
+            })
+        }else{
+            res.json({
+                success:1,
+                users:results
+            })
+        }
+    })
+})
+
+
+router.route("/completed").get((req,res)=>{
+    auth.getAll((err,results)=>{
+        if(err){
+            res.send({
+                success:0,
+                error:err
+            })
+        }else{
+            res.json({
+                success:1,
+                users:results
+            })
+        }
+    })
+})
+
+
+
 module.exports = router;

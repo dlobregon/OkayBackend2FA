@@ -20,8 +20,8 @@ exports.linkingUser=(userId,done)=>{
         }else if(result.userExternalId!==undefined){
             // time to process the linking
             const userExternalId = result.userExternalId
-            const tenantId = config.tenant; // replace with your tenantId
-            const secret = config.token; // replace with your secret
+            const tenantId = config.tenant; 
+            const secret = config.token; 
             const hashStr = `${tenantId}${userExternalId}${secret}`;
             const signature = createHashSignature(hashStr);
             axios({
