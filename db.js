@@ -2,6 +2,7 @@ const sqlite3   =   require("sqlite3");
 
 let db= null
 let started=false
+
 exports.connect = (done)=>{
     db = new sqlite3.Database('./user.db',(err)=>{
         if(err){
@@ -19,7 +20,9 @@ exports.connect = (done)=>{
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             email TEXT,
-            userExternalId TEXT)
+            userExternalId TEXT,
+            linked INTEGER
+            )
     `
     db.run(sqlQuery)
     /**

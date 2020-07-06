@@ -1,19 +1,19 @@
-const fs= require('fs'),
-      config = require("./config"),
-      express = require("express"),
-      bodyParser = require("body-parser"),
-      db = require("./db"),
-      env = process.env,
-      app = express(),
-      https = require('https');
+const fs= require('fs')
+const config = require("./config")
+const express = require("express")
+const bodyParser = require("body-parser")
+const db = require("./db")
+const env = process.env
+const app = express()
+const https = require('https')
 
 // importing the routes
-const indexRoutes = require("./routes/index.js"), 
-      userRoutes = require("./routes/users.js"),
-      linkRoutes= require("./routes/links.js"),
-      authRoutes= require("./routes/auths"), 
-      callbackRoutes= require("./routes/callbacks")
-      ;
+const indexRoutes = require("./routes/index.js") 
+const userRoutes = require("./routes/users.js")
+const linkRoutes= require("./routes/links.js")
+const authRoutes= require("./routes/auths")
+const callbackRoutes= require("./routes/callbacks")
+
 
 const crendential={};
 
@@ -51,9 +51,7 @@ if(config.mode==="2"){
   httpsServer.listen(env.NODE_PORT || 3000, env.NODE_IP || '0.0.0.0', function () {
     console.log(`Application worker ${process.pid} started...`);
   });
-  console.log('HTTPS Server listening on %s:%s');
-}else
-{
+}else{
   app.listen(env.NODE_PORT || 3000, env.NODE_IP || '0.0.0.0', function () {
     console.log(`Application worker ${process.pid} started...`);
   });

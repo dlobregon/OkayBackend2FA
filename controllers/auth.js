@@ -21,8 +21,8 @@ exports.authUser=(userId,done)=>{
         }else if(result!=undefined &&result.userExternalId!==undefined){
             // time to process the linking
             const userExternalId = result.userExternalId
-            const tenantId = config.tenant; // replace with your tenantId
-            const secret = config.token; // replace with your secret
+            const tenantId = config.tenant;
+            const secret = config.token; 
             const authParams = {
                 guiText: 'Do you okay this transaction',
                 guiHeader: 'Authorization requested'
@@ -75,9 +75,9 @@ exports.authUser=(userId,done)=>{
 }
 
 exports.check=(session,done)=>{
-  const sessionExternalId  = session; // "replace with your 'sessionExternalId' from previous Auth request
-  const tenantId = config.tenant; // replace with your tenantId
-  const secret = config.token; // replace with your secret
+  const sessionExternalId  = session; 
+  const tenantId = config.tenant; 
+  const secret = config.token; 
   const hashStr = `${tenantId}${sessionExternalId}${secret}`;
   const signature = createHashSignature(hashStr);
 

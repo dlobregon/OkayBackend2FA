@@ -1,5 +1,5 @@
 const db=     require("../db")
-const config= require("../config.json")
+
 
 
 exports.register=(session,done)=>{
