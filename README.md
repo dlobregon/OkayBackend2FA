@@ -98,22 +98,20 @@ curl -H "Content-Type: application/json" -X POST -d '{"id":"1"}' http://localhos
 ~~~~
 
 ##### 3.2.2 Get the completed auth sessions.
-We can consider an Auth Session complete when the Okay server sends the success callback to our server endpoint. The current project get track about that sessions..
-
-To get the completed sessions we need to go to:
+We can consider an Auth Session complete when the Okay server sends the success callback to our server endpoint. The current project get track about that sessions. To get the completed sessions we need to go to:
 ~~~~
-in the live demo
+-in the live demo
 https://hackergt.tech:3000/auth/completed
-in the localhost we can not get information about the completed sessions.
-~~~
+-in the localhost we can not get information about the completed sessions.
+~~~~
 
 ##### 3.2.3 Get the incomplete auth sessions. 
 The sessions that for some reason are incomplete can be accessed in the following site:
 ~~~~
-in the live demo
+-in the live demo
 https://hackergt.tech:3000/auth/pending
 
-in the localhost we cannot update the auth session status  because the server can not be reached by the Okay's server callback.
+-in the localhost we cannot update the auth session status  because the server can not be reached by the Okay's -server callback.
 
 http://localhost:3000/auth/pending
 ~~~~
@@ -123,17 +121,17 @@ http://localhost:3000/auth/pending
 To know the current status of an Auth session in the Okay's server, we must make the following GET request:
 
 ~~~~
-The "170347" identifier is a Auth Session External Id. in the live demo. 
+-The "170347" identifier is a Auth Session External Id. in the live demo. 
 https://hackergt.tech:3000/auth/check/170347
 
-in the localhost:
+-in the localhost:
 http://localhost:3000/auth/check/170347
 ~~~~
  
 #### 3.3 Callback Endpoint
 In order to receive the Okay's server callbacks we have an Endpoint on:
 ~~~~
-In the live demo.
+-In the live demo.
 https://hackergt.tech:3000/callback
 ~~~~
 This endpoint checks the signature of every request from Okay's server using the the shared secret to avoid compromise security.
